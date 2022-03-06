@@ -1,0 +1,40 @@
+_G.Toggle = false
+
+while _G.Toggle do
+wait()
+
+    local get_descendants = game.GetDescendants
+    
+    local look_for_name = 'Scrap_Generate_ERROR' 
+    
+    local precise_check = false
+    
+    local lower = string.lower
+    
+    local GetService = game.GetService
+    
+    local ffc = game.FindFirstChild
+    
+    local IsA = game.IsA
+    
+    local wfc = game.WaitForChild
+    
+    local LocalPlayer = GetService(game,'Players').LocalPlayer
+    
+    local Character = LocalPlayer.Character
+    
+    local RootPart = wfc(Character,"HumanoidRootPart",math.huge) 
+    
+    local object = game:GetService("Workspace")["Pickable_Scrap"]
+    
+    for i,v in next, get_descendants(object) do 
+        if not RootPart or not Character then continue end; 
+    if Character and RootPart then 
+    if precise_check and string.find(lower(v.Name),lower(look_for_name)) and IsA(v,"BasePart") or not precise_check and IsA(v,"BasePart") and lower(v.Name) == lower(look_for_name) then
+    RootPart.CFrame = v.CFrame
+    wait(1) -- 1 is the minimum value for wait (not task.wait)
+    end
+    end
+    end
+
+end
